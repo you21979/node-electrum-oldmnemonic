@@ -1,9 +1,6 @@
 import * as assert from 'assert'
+import * as crypto from 'crypto'
 import { mn_encode, mn_decode, valid_word } from '../lib/electrum_seed'
-
-//const crypto = require('crypto');
-//const seed = crypto.randomBytes(32);
-//const seedhex = seed.toString("hex")
 
 describe('test', () => {
     const seedhex = '8edad31a95e7d59f8837667510d75a4d'
@@ -17,8 +14,19 @@ describe('test', () => {
         const result: string = mn_decode(words.split(' '))
         assert(result === seedhex)
     })
-    it('valid test', () => {
+    it('valid test success', () => {
         const result: boolean = valid_word('stone')
-        assert(result)
+        assert(result === true)
+    })
+    it('valid test false', () => {
+        const result: boolean = valid_word('ston')
+        assert(result === false)
+    })
+    it('random test', () => {
+        const seed: Buffer = crypto.randomBytes(32);
+        const seedhex: string = seed.toString("hex")
+        const new_words: string[] = mn_encode(seedhex)
+        const restore_seedhex: string = mn_decode(new_words)
+        assert(seedhex === restore_seedhex)
     })
 })

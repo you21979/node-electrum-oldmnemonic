@@ -6,7 +6,7 @@ const mod = ( x: number, y: number): number => x - y * Math.floor(x / y)
 
 const wn: number = mnemonic_words.length
 
-export const mn_encode = (message: string): string[] => {
+export const mn_encode = (message: string): string => {
     return range(message.length / 8).map( (i: number): string[]  => {
         const idx: number = 8 * i
         const word: string = message.slice(idx, idx + 8)
@@ -17,10 +17,11 @@ export const mn_encode = (message: string): string[] => {
         return [mnemonic_words[w1], mnemonic_words[w2], mnemonic_words[w3]]
     }).reduce((r: string[], v: string[]): string[] => {
         return r.concat(v)
-    }, [])
+    }, []).join(' ')
 }
 
-export const mn_decode = (wlist: string[]): string => {
+export const mn_decode = (wlistString: string): string => {
+    const wlist: string[] = wlistString.split(' ')
     return range(wlist.length / 3 | 0).map( (i: number): number => {
         const idx: number = 3 * i
         const [word1, word2, word3]: string[] = wlist.slice(idx, idx + 3)
@@ -37,5 +38,3 @@ export const mn_decode = (wlist: string[]): string => {
 export const valid_word = (word: string): boolean => {
     return mnemonic_words.indexOf(word) === -1 ? false : true
 }
-
-

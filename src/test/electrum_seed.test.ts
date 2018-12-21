@@ -8,11 +8,11 @@ describe('test', () => {
     const words = 'hardly point goal hallway patience key stone difference ready caught listen fact'
 
     it('encode test', () => {
-        const result: string[] = mn_encode(seedhex)
-        assert(result.join(' ') === words)
+        const result: string = mn_encode(seedhex)
+        assert(result === words)
     })
     it('decode test', () => {
-        const result: string = mn_decode(words.split(' '))
+        const result: string = mn_decode(words)
         assert(result === seedhex)
     })
     it('valid test success', () => {
@@ -26,7 +26,7 @@ describe('test', () => {
     it('random test', () => {
         const seed: Buffer = crypto.randomBytes(32);
         const seedhex: string = seed.toString("hex")
-        const new_words: string[] = mn_encode(seedhex)
+        const new_words: string = mn_encode(seedhex)
         const restore_seedhex: string = mn_decode(new_words)
         assert(seedhex === restore_seedhex)
     })

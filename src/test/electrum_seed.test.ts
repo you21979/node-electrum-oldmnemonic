@@ -47,55 +47,55 @@ describe('abnormal test', () => {
         try{
             const result: string = encode('')
             done(new Error("false"))
-        }catch(e){ done(null) }
+        }catch(e){ done(e.message === 'invalid empty string' ? null : new Error()) }
     })
     it('encode test 2', (done) => {
         try{
             const result: string = encode('00')
             done(new Error("false"))
-        }catch(e){ done(null) }
+        }catch(e){ done(e.message === 'must be a multiple of 8' ? null : new Error()) }
     })
     it('encode test 3', (done) => {
         try{
             const result: string = encode('ss')
             done(new Error("false"))
-        }catch(e){ done(null) }
+        }catch(e){ done(e.message === 'must be a hex string' ? null : new Error()) }
     })
     it('encode test 4', (done) => {
         try{
             const result: string = encode('ssssssss')
             done(new Error("false"))
-        }catch(e){ done(null) }
+        }catch(e){ done(e.message === 'must be a hex string' ? null : new Error()) }
     })
     it('decode test 1', (done) => {
         try{
             const result: string = decode('')
             done(new Error("false"))
-        }catch(e){ done(null) }
+        }catch(e){ done(e.message === 'invalid empty string' ? null : new Error()) }
     })
     it('decode test 2', (done) => {
         try{
             const result: string = decode('stone')
             done(new Error("false"))
-        }catch(e){ done(null) }
+        }catch(e){ done(e.message === 'must be a multiple of 3' ? null : new Error()) }
     })
     it('decode test 3', (done) => {
         try{
             const result: string = decode('ston')
             done(new Error("false"))
-        }catch(e){ done(null) }
+        }catch(e){ done(e.message === 'include invalid word' ? null : new Error()) }
     })
     it('decode test 4', (done) => {
         try{
             const result: string = decode('z z z')
             done(new Error("false"))
-        }catch(e){ done(null) }
+        }catch(e){ done(e.message === 'include invalid word' ? null : new Error()) }
     })
     it('decode test 5', (done) => {
         try{
             const result: string = decode('stone stone stone stone')
             done(new Error("false"))
-        }catch(e){ done(null) }
+        }catch(e){ done(e.message === 'must be a multiple of 3' ? null : new Error()) }
     })
 })
 

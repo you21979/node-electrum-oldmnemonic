@@ -39,18 +39,17 @@ export const encode = (seedhex: string): string => {
     if( isNaN(parseInt(seedhex, 16)) ) throw new Error("must be a hex string")
     if( seedhex.length % 8 ) throw new Error("must be a multiple of 8")
     const wlist: string[] = mn_encode_unsafe(seedhex)
-    if(wlist.length === 0) throw new Error("zero word list")
     const wordstring: string = wlist.join(' ')
     return wordstring
 }
 
 export const decode = (wordstring: string): string => {
+    if( wordstring.length === 0 ) throw new Error("invalid empty string")
     const wlist: string[] = wordstring.split(' ')
-    if(wlist.length === 0) throw new Error("zero word list")
-    if(wlist.length % 3) throw new Error("must be a multiple of 3")
     wlist.forEach( word => {
         if(!valid_word(word)) throw new Error("include invalid word")
     })
+    if(wlist.length % 3) throw new Error("must be a multiple of 3")
     const seedhex: string = mn_decode_unsafe(wlist)
     return seedhex
 }

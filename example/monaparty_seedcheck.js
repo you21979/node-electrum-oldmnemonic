@@ -16,7 +16,7 @@ const monacoin = {
 
 const words = ""
 
-const oldseedhex = oldmnemonic.mn_decode(words.split(' '));
+const oldseedhex = oldmnemonic.decode(words);
 const m = bitcoin.HDNode.fromSeedBuffer(Buffer.from(oldseedhex, 'hex'), monacoin)
 console.log(m.derivePath("m/0'/0/0").getAddress())
 

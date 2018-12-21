@@ -1,6 +1,6 @@
 {
   "name": "electrum-oldmnemonic",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "electrum old mnemonic",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

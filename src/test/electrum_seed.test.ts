@@ -1,6 +1,7 @@
 import * as assert from 'assert'
 import * as crypto from 'crypto'
 import { mn_encode, mn_decode, valid_word } from '../lib/electrum_seed'
+import mnemonic_words from '../lib/wordlist'
 
 describe('test', () => {
     const seedhex = '8edad31a95e7d59f8837667510d75a4d'
@@ -28,5 +29,8 @@ describe('test', () => {
         const new_words: string[] = mn_encode(seedhex)
         const restore_seedhex: string = mn_decode(new_words)
         assert(seedhex === restore_seedhex)
+    })
+    it('length check', () => {
+        assert(mnemonic_words.length === 1626)
     })
 })

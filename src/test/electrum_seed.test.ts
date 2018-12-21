@@ -57,6 +57,12 @@ describe('abnormal test', () => {
     })
     it('encode test 3', (done) => {
         try{
+            const result: string = encode('ss')
+            done(new Error("false"))
+        }catch(e){ done(null) }
+    })
+    it('encode test 4', (done) => {
+        try{
             const result: string = encode('ssssssss')
             done(new Error("false"))
         }catch(e){ done(null) }

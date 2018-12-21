@@ -35,9 +35,9 @@ export const mn_decode_unsafe = (wlist: string[]): string => {
 }
 
 export const encode = (seedhex: string): string => {
+    if( isNaN(parseInt(seedhex, 16)) ) throw new Error("must be a hex string")
     if( seedhex.length === 0 ) throw new Error("invalid empty string")
     if( seedhex.length % 8 ) throw new Error("must be a multiple of 8")
-    if( isNaN(parseInt(seedhex, 16)) ) throw new Error("must be a hex string")
     const wlist: string[] = mn_encode_unsafe(seedhex)
     if(wlist.length === 0) throw new Error("zero word list")
     const wordstring: string = wlist.join(' ')
